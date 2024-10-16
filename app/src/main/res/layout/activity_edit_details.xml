@@ -39,6 +39,26 @@
             android:textColorHint="@color/black" />
 
         <Switch
+            android:id="@+id/swGluten"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textSize="18sp"
+            android:hint="Pendiente"
+            android:textStyle="bold"
+            android:textColorHint="@color/black"/>
+
+        <Switch
+            android:id="@+id/swLactosa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textSize="18sp"
+            android:hint="Pendiente"
+            android:textStyle="bold"
+            android:textColorHint="@color/black"/>
+
+        <Switch
             android:id="@+id/swPending"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

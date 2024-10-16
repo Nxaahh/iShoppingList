@@ -7,6 +7,8 @@ public class Producto implements Serializable {
     int id;
     String nombre;
     String nota;
+    boolean gluten;
+    boolean lactosa;
     Boolean estadoCompra;
 
     public Producto() {
@@ -20,12 +22,36 @@ public class Producto implements Serializable {
         this.id = id;
     }
 
+    public Boolean getEstadoCompra() {
+        return estadoCompra;
+    }
+
+    public void setEstadoCompra(Boolean estadoCompra) {
+        this.estadoCompra = estadoCompra;
+    }
+
+    public boolean isLactosa() {
+        return lactosa;
+    }
+
+    public void setLactosa(boolean lactosa) {
+        this.lactosa = lactosa;
+    }
+
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public boolean isGluten() {
+        return gluten;
+    }
+
+    public void setGluten(boolean gluten) {
+        this.gluten = gluten;
     }
 
     public String getNota() {
@@ -36,20 +62,14 @@ public class Producto implements Serializable {
         this.nota = nota;
     }
 
-    public Boolean getEstadoCompra() {
-        return estadoCompra;
-    }
-
-    public void setEstadoCompra(Boolean estadoCompra) {
-        this.estadoCompra = estadoCompra;
-    }
-
     @Override
     public String toString() {
         return "Producto{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", nota='" + nota + '\'' +
+                ", gluten=" + gluten +
+                ", lactosa=" + lactosa +
                 ", estadoCompra=" + estadoCompra +
                 '}';
     }

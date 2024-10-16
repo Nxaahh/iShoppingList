@@ -5,6 +5,7 @@ import static com.example.ishoppinglist.database.Database.productoList;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -21,7 +22,7 @@ import com.example.ishoppinglist.adapters.ProductAdapter;
 import com.example.ishoppinglist.models.Producto;
 
 public class DetailActivity extends AppCompatActivity {
-    private TextView tvName, tvNote, tvStatus, tvID;
+    private TextView tvName, tvNote, tvStatus, tvID, tvGluten, tvLactosa;
     Button btnBack, btnEdit;
 
     @Override
@@ -40,6 +41,8 @@ public class DetailActivity extends AppCompatActivity {
         tvNote = findViewById(R.id.tvNote);
         tvID = findViewById(R.id.tvID);
         tvStatus = findViewById(R.id.tvStatus);
+        tvGluten = findViewById(R.id.tvGluten);
+        tvLactosa = findViewById(R.id.tvLactosa);
         btnBack = findViewById(R.id.btnBack);
         btnEdit = findViewById(R.id.btnEdit);
 
@@ -86,6 +89,19 @@ public class DetailActivity extends AppCompatActivity {
 
         if (p.getEstadoCompra() == false) {
             tvStatus.setText("No Pendiente");
+        }
+
+        if(p.isGluten()){
+            tvGluten.setText("Con Gluten");
+        }
+        else {
+            tvGluten.setText("Sin Gluten");
+        }
+        if(p.isLactosa()){
+            tvLactosa.setText("Con Lactosa");
+        }
+        else {
+            tvLactosa.setText("Sin Lactosa");
         }
 
 

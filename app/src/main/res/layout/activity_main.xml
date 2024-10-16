@@ -23,6 +23,13 @@
             android:textSize="15sp"
             android:textStyle="bold"/>
 
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp" />
+
+
         <ListView
             android:id="@+id/lvProduct"
             android:layout_width="409dp"

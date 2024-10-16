@@ -21,7 +21,7 @@ import com.example.ishoppinglist.models.Producto;
 
 public class EditDetailsActivity extends AppCompatActivity {
     EditText etName, etNote;
-    Switch swPending;
+    Switch swPending, swLactosa, swGluten;
     Button btnCancel, btnSave;
     Producto editingProduct;  // Producto que estamos editando, si existe
     int productIndex = -1;    // Índice del producto que estamos editando en la lista
@@ -40,6 +40,8 @@ public class EditDetailsActivity extends AppCompatActivity {
         etName = findViewById(R.id.etName);
         etNote = findViewById(R.id.etNote);
         swPending = findViewById(R.id.swPending);
+        swLactosa = findViewById(R.id.swLactosa);
+        swGluten = findViewById(R.id.swGluten);
         btnSave = findViewById(R.id.btnSave);
         btnCancel = findViewById(R.id.btnCancel);
 
@@ -52,6 +54,8 @@ public class EditDetailsActivity extends AppCompatActivity {
             etName.setText(editingProduct.getNombre());
             etNote.setText(editingProduct.getNota());
             swPending.setChecked(editingProduct.getEstadoCompra());
+            swGluten.setChecked(editingProduct.isGluten());
+            swLactosa.setChecked(editingProduct.isLactosa());
 
             // Buscar el índice del producto en la lista
             for (int i = 0; i < productoList.size(); i++) {
@@ -73,19 +77,25 @@ public class EditDetailsActivity extends AppCompatActivity {
                 } else {
                     String nombre = etName.getText().toString();
                     String nota = etNote.getText().toString();
-                    boolean estadoCompra = swPending.isChecked();  // Estado del Switch
+                    boolean estadoCompra = swPending.isChecked();// Estado del Switch
+                    boolean contieneLactosa = swLactosa.isChecked();
+                    boolean contieneGluten = swGluten.isChecked();
 
                     if (productIndex != -1) {
                         // Si estamos editando un producto existente, lo actualizamos en la lista
                         productoList.get(productIndex).setNombre(nombre);
                         productoList.get(productIndex).setNota(nota);
                         productoList.get(productIndex).setEstadoCompra(estadoCompra);
+                        productoList.get(productIndex).setLactosa(contieneLactosa);
+                        productoList.get(productIndex).setGluten(contieneGluten);
                     } else {
                         // Si es un nuevo producto, lo añadimos a la lista
                         Producto newProduct = new Producto();
                         newProduct.setNombre(nombre);
                         newProduct.setNota(nota);
                         newProduct.setEstadoCompra(estadoCompra);
+                        newProduct.setGluten(contieneGluten);
+                        newProduct.setLactosa(contieneLactosa);
                         productoList.add(newProduct);
                     }
                     Toast.makeText(EditDetailsActivity.this, "Producto Editado", Toast.LENGTH_SHORT).show();

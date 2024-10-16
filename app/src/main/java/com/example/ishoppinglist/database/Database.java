@@ -17,6 +17,7 @@ public class Database {
             p.setId(1);
             p.setNombre("Botella de Agua");
             p.setNota("Botella fria 250ml");
+
             p.setEstadoCompra(true);
             productoList.add(p);
             //Producto 2
@@ -25,6 +26,7 @@ public class Database {
             p2.setNombre("Botella de Fanta");
             p2.setNota("Botella fria 500ml");
             p2.setEstadoCompra(false);
+
             productoList.add(p2);
         }
 

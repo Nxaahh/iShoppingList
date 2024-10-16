@@ -21,8 +21,9 @@ import com.example.ishoppinglist.models.Producto;
 
 public class AddSystemActivity extends AppCompatActivity {
     EditText etName,etNote;
-    Switch swPending;
-    Button btnCancel,btnSave;    @Override
+    Switch swPending, swLactosa, swGluten;
+    Button btnCancel,btnSave;
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
@@ -35,6 +36,8 @@ public class AddSystemActivity extends AppCompatActivity {
         etName=findViewById(R.id.etName);
         etNote=findViewById(R.id.etNote);
         swPending=findViewById(R.id.swPending);
+        swLactosa=findViewById(R.id.swLactosa);
+        swGluten=findViewById(R.id.swGluten);
 
 
 
@@ -54,6 +57,8 @@ public class AddSystemActivity extends AppCompatActivity {
                     String nombre = etName.getText().toString();
                     String nota = etNote.getText().toString();
                     boolean estadoCompra = swPending.isChecked();  // Estado del Switch (comprado o pendiente)
+                    boolean contieneLactosa = swLactosa.isChecked();
+                    boolean contieneGluten = swGluten.isChecked();
 
                     // Crear el objeto Producto
                     Producto newProduct = new Producto();
@@ -62,6 +67,8 @@ public class AddSystemActivity extends AppCompatActivity {
                     newProduct.setNombre(nombre);
                     newProduct.setNota(nota);
                     newProduct.setEstadoCompra(estadoCompra);
+                    newProduct.setLactosa(contieneLactosa);
+                    newProduct.setGluten(contieneGluten);
                     productoList.add(newProduct);
 
                     // Enviar el producto a la MainActivity

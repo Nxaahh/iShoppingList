@@ -40,6 +40,22 @@
             android:textSize="15sp"/>
 
         <TextView
+            android:id="@+id/tvGluten"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Gluten"
+            android:layout_margin="20dp"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tvLactosa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lactosa"
+            android:layout_margin="20dp"
+            android:textSize="15sp"/>
+
+        <TextView
             android:id="@+id/tvStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

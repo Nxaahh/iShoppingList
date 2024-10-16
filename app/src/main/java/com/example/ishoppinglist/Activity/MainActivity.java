@@ -7,9 +7,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -30,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
     private Button btnAddSystem, btnAddPending;
     private TextView textView;
     private ListView lvProduct;
+    private Spinner spinner2;
+    private  ArrayList<Producto> filteredList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,21 +51,17 @@ public class MainActivity extends AppCompatActivity {
         });
         textView = findViewById(R.id.textView);
         lvProduct = findViewById(R.id.lvProduct);
+        spinner2 = findViewById(R.id.spinner2);
+
+
+        String[] datos = new String[]{"Todos", "Lactosa", "Gluten"};
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, datos);
+
+        spinner2.setAdapter(arrayAdapter);
+
+
         inicializeList();
-//Lista que filtre solo aquellos productos que se tengan que comprar
-        List<Producto> filteredList = new ArrayList<Producto>();
-        for (Producto producto : productoList) {
-            if (producto.getEstadoCompra() == true) {
-                filteredList.add(producto);
-            }
-        }
 
-        //Creo el adaptador con la lista filtrada como parametro para que se muestren solo aquellos productos que esten en la lista
-        ProductAdapter adapter = new ProductAdapter(MainActivity.this, 0, filteredList);
-        //Asignamos el adaptador
-
-
-        lvProduct.setAdapter(adapter);
 
         lvProduct.setOnItemClickListener((parent, view, position, id) -> {
             Producto p = filteredList.get(position);
@@ -67,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             detailIntent.putExtra("product", p);  // Pasando el producto como Serializable
             startActivity(detailIntent);
         });
+
 
         Intent detailIntent = getIntent();
         if (detailIntent.getSerializableExtra("product") != null) {
@@ -88,6 +93,51 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(addPending);
             }
         });
+
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+// Filtrar la lista dependiendo de la selección del spinner
+                switch (position) {
+                    case 1: // Lactosa
+                        filteredList = new ArrayList<>();
+                        for (Producto producto : productoList) {
+                            if (producto.isLactosa()) {
+                                filteredList.add(producto);
+                            }
+                        }
+                        break;
+                    case 2: // Gluten
+                        filteredList = new ArrayList<>();
+                        for (Producto producto : productoList) {
+                            if (producto.isGluten()) {
+                                filteredList.add(producto);
+                            }
+                        }
+                        break;
+                    default: // Todos
+                        filteredList = new ArrayList<>();
+                        for (Producto producto : productoList) {
+                            if (producto.getEstadoCompra()) {
+                                filteredList.add(producto);
+                            }
+                        }
+                        break;
+
+                }
+                ProductAdapter adapter = new ProductAdapter(MainActivity.this, 0, filteredList);
+                lvProduct.setAdapter(adapter);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // No hacer nada si no hay selección
+            }
+        });
+
 
     }
 }
